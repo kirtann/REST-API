@@ -83,7 +83,7 @@ app.delete('/api/v1/product/:id', async (req, res) => {
     })
   }
 
-  await Product.deleteOne({id: req.params.id});
+  await Product.deleteOne(product);
 
   res.status(200).json({
     success:true,
