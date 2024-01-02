@@ -33,7 +33,33 @@ app.post('/api/v1/product/new', async (req, res) => {
   const product = await Product.create(req.body)
 
   res.status(200).json({
-    sucess:true,
+    success:true,
+    product
+  })
+})
+
+// Read Products
+app.get('/api/v1/products', async (req, res) => {
+  const products = await Product.find();
+
+  res.status(200).json({
+    success:true,
+    products
+  })
+})
+
+// Update Product
+app.put('/api/v1/product/:id', async (req, res) => {
+  let product = await Product.findById(req.params.id);
+
+  product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    useFindAndModify: false, 
+    useValidators: true
+  })
+
+  res.status(200).json({
+    success:true,
     product
   })
 })
